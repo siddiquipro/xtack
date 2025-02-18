@@ -1,0 +1,51 @@
+{
+	"name": "xtack",
+	"type": "module",
+	"version": "1.0.0",
+	"description": "A Node.js framework agnostic packages",
+	"author": {
+		"name": "Mohammad Siddiqui",
+		"email": "24387047+siddiquipro@users.noreply.github.com",
+		"url": "https://github.com/siddiquipro"
+	},
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/siddiquipro/xtack.git"
+	},
+	"keywords": [
+		"xtack",
+		"node",
+		"framework",
+		"agnostic"
+	],
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"LICENSE",
+		"README.md",
+		"dist"
+	],
+	"scripts": {
+		"test": "vitest",
+		"build": "vite build",
+		"deploy": "npm publish",
+		"typecheck": "tsc --noEmit",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@antfu/eslint-config": "^3.8.0",
+		"@semantic-release/changelog": "^6.0.3",
+		"@semantic-release/git": "^10.0.1",
+		"@types/node": "^22.8.6",
+		"eslint": "^9.13.0",
+		"eslint-plugin-format": "^0.1.2",
+		"semantic-release": "^24.2.0",
+		"typescript": "^5.6.3",
+		"vite": "^5.4.10",
+		"vite-plugin-dts": "^4.3.0",
+		"vitest": "^2.1.4"
+	}
+}

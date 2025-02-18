@@ -1,0 +1,30 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"lib": ["ESNext"],
+		"experimentalDecorators": true,
+		"module": "NodeNext",
+		"types": ["@types/node"],
+		"strictBindCallApply": true,
+		"strictFunctionTypes": true,
+		"strictNullChecks": true,
+		"strictPropertyInitialization": true,
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"declaration": true,
+		"outDir": "dist",
+		"removeComments": false,
+		"sourceMap": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"isolatedDeclarations": true,
+		"isolatedModules": true,
+		"skipLibCheck": true
+	},
+	"compileOnSave": true,
+	"include": ["src"]
+}
