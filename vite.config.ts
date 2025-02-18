@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
 				fileName: "index",
 			},
 			rollupOptions: {
-				external: ["node:fs", "node:util", "node:path"],
+				external: ["node:fs", "node:fs/promises", "node:util", "node:path", "node:url", "node:buffer", "node:crypto"],
 			},
 		},
 
@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => {
 		},
 		plugins: [
 			// generate typescript types
-			dts({ 	insertTypesEntry: true 	}),
+			dts({ insertTypesEntry: true }),
 		],
 		define: {
 			"import.meta.vitest": mode !== "production",

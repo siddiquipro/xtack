@@ -65,7 +65,6 @@ const hbs = new NodeHbs({
 });
 
 const html = hbs.render("template.hbs", { title: "Hello, world!" });
-console.log(html);
 ```
 
 ### `Encryption`
@@ -81,8 +80,6 @@ const encryption = new Encryption({
 
 const encrypted = encryption.encrypt("Sensitive data");
 const decrypted = encryption.decrypt(encrypted);
-
-console.log(decrypted); // "Sensitive data"
 ```
 
 ### `helpers`
@@ -93,7 +90,6 @@ The `helpers` module provides utility functions.
 import { helpers } from "xtack";
 
 const formattedDate = helpers.formatDate(new Date());
-console.log(formattedDate);
 ```
 
 ### `Session`
@@ -113,6 +109,5 @@ const session = new Session({
 session.start();
 session.set("userId", 123);
 const userId = session.get("userId");
-console.log(userId); // 123
 session.destroy();
 ```

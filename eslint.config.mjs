@@ -10,6 +10,7 @@ export default antfu(
 			semi: true,
 			quotes: "double",
 		},
+
 	},
 	{
 		rules: {

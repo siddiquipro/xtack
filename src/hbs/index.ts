@@ -1,8 +1,8 @@
-import handlebars from "handlebars";
+import type { HbsData, HbsOptions, RegisteredPartials } from "./types.js";
 import fs from "node:fs";
 import { basename, join } from "node:path";
 
-import type { HbsData, HbsOptions, RegisteredPartials } from "./types.js";
+import handlebars from "handlebars";
 
 import debug from "../debug.js";
 
