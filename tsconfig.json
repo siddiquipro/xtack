@@ -21,7 +21,6 @@
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
-		"isolatedDeclarations": true,
 		"isolatedModules": true,
 		"skipLibCheck": true
 	},
