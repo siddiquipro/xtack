@@ -1,3 +1,3 @@
-# MS Void
+# Xtack
 
-A Node.js framework agnostic packages WIP.
+A collection of node.js framework agnostic packages
