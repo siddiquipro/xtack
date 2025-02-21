@@ -8,7 +8,7 @@ export class Session {
 	private store: CookieStore;
 	private _valuesStore?: ValuesStore;
 	private sessionIdKey = "__id__";
-	private flash = {
+	private _flash = {
 		key: "__flash__",
 		messages: new ValuesStore({}),
 		responseMessages: new ValuesStore({}),
@@ -21,7 +21,7 @@ export class Session {
 			throw new Error("Session age is required");
 
 		if (config.flashKey) {
-			this.flash.key = config.flashKey;
+			this._flash.key = config.flashKey;
 		}
 
 		if (config.sessionIdKey) {
@@ -34,16 +34,16 @@ export class Session {
 	initiate() {
 		const contents = this.store.read() as SessionData | null;
 		this._valuesStore = new ValuesStore(contents);
-		if (this.has(this.flash.key)) {
-			this.flash.messages.update(this.pull(this.flash.key, null));
+		if (this.has(this._flash.key)) {
+			this._flash.messages.update(this.pull(this._flash.key, null));
 		}
 
 		this.initializeSessionId();
 	}
 
 	commit() {
-		if (!this.flash.messages.isEmpty) {
-			this.put(this.flash.key, this.flash.messages.all());
+		if (!this._flash.messages.isEmpty) {
+			this.put(this._flash.key, this._flash.messages.all());
 		}
 		this.store.write(this.all());
 	}
@@ -95,6 +95,14 @@ export class Session {
 
 	decrement(key: string, steps = 1) {
 		return this.valuesStore.decrement(key, steps);
+	}
+
+	getFlash(key: string) {
+		return this._flash.messages.get(key, "");
+	}
+
+	flash(key: string, value: AllowedSessionValues) {
+		this._flash.messages.set(key, value);
 	}
 
 	clear() {
