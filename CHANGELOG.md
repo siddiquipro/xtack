@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/siddiquipro/xtack/compare/v1.1.0...v1.1.1) (2025-02-21)
+
+
+### Bug Fixes
+
+* added flash methods in session ([4b7a9a1](https://github.com/siddiquipro/xtack/commit/4b7a9a1e21524a98fc046270949c8b878e82600f))
+
 # [1.1.0](https://github.com/siddiquipro/xtack/compare/v1.0.0...v1.1.0) (2025-02-18)
 
 
