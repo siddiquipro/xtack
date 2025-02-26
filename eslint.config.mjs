@@ -10,7 +10,8 @@ export default antfu(
 			semi: true,
 			quotes: "double",
 		},
-
+		hbs: true,
+		handlebars: true,
 	},
 	{
 		rules: {

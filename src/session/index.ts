@@ -1,5 +1,6 @@
 import type { AllowedSessionValues, SessionConfig, SessionData } from "./types.js";
 import { randomUUID } from "node:crypto";
+import debug from "../debug.js";
 import { Exception } from "../exception/index.js";
 import { CookieStore } from "./cookie-store.js";
 import { ValuesStore } from "./value-store.js";
@@ -11,7 +12,7 @@ export class Session {
 	private _flash = {
 		key: "__flash__",
 		messages: new ValuesStore({}),
-		responseMessages: new ValuesStore({}),
+		readonlyMessages: new ValuesStore({}), // these are only read only
 	};
 
 	constructor(config: SessionConfig) {
@@ -35,7 +36,12 @@ export class Session {
 		const contents = this.store.read() as SessionData | null;
 		this._valuesStore = new ValuesStore(contents);
 		if (this.has(this._flash.key)) {
-			this._flash.messages.update(this.pull(this._flash.key, null));
+			const currentValues = this.pull(this._flash.key, null);
+			this._flash.readonlyMessages.update(currentValues);
+			debug("Session has flash messages", currentValues);
+
+			// remove the flash messages from the session
+			this.forget(this._flash.key);
 		}
 
 		this.initializeSessionId();
@@ -98,7 +104,7 @@ export class Session {
 	}
 
 	getFlash(key: string) {
-		return this._flash.messages.get(key, "");
+		return this._flash.readonlyMessages.get(key, undefined);
 	}
 
 	flash(key: string, value: AllowedSessionValues) {

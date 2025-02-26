@@ -74,7 +74,7 @@ export class ValuesStore {
 
 	update(values: SessionData): void {
 		this.modified = true;
-		this.values = new Map(Object.entries(values));
+		this.values = new Map(Object.entries(values || {}));
 	}
 
 	merge(values: SessionData): any {
