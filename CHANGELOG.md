@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/siddiquipro/xtack/compare/v1.1.1...v1.1.2) (2025-02-26)
+
+
+### Bug Fixes
+
+* flash get and set ([38d7f4f](https://github.com/siddiquipro/xtack/commit/38d7f4fa5d2931b82cb32c43396f9f1826b9b936))
+
 ## [1.1.1](https://github.com/siddiquipro/xtack/compare/v1.1.0...v1.1.1) (2025-02-21)
 
 
