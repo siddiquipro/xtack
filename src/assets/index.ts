@@ -16,14 +16,14 @@ export class AssetsManager {
 			this.getViteManifest();
 	}
 
-	public getJsScript(name: string) {
+	public getJsScript(name: string, attrs = "") {
 		const paths = this.getAssetPath(name, "js");
-		return paths.map(path => `<script type="module" src="${path}"></script>`).join("");
+		return paths.map(path => `<script type="module" src="${path}" ${attrs}></script>`).join("");
 	}
 
-	public getCssStyle(name: string) {
+	public getCssStyle(name: string, attrs = "") {
 		const paths = this.getAssetPath(name, "css");
-		return paths.map(path => `<link rel="stylesheet" href="${path}">`).join("");
+		return paths.map(path => `<link rel="stylesheet" href="${path}" ${attrs}>`).join("");
 	}
 
 	private getAssetPath(name: string, type: string) {
