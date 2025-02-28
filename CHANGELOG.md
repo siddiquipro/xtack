@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/siddiquipro/xtack/compare/v1.1.2...v1.1.3) (2025-02-28)
+
+
+### Bug Fixes
+
+* added attrs ([2f9d9d4](https://github.com/siddiquipro/xtack/commit/2f9d9d4dda231ed0c2ad26c7b4536f1fbb616714))
+
 ## [1.1.2](https://github.com/siddiquipro/xtack/compare/v1.1.1...v1.1.2) (2025-02-26)
 
 
