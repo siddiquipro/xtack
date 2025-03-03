@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/siddiquipro/xtack/compare/v1.1.3...v1.1.4) (2025-03-03)
+
+
+### Bug Fixes
+
+* make deleteCookie optional ([4d730e4](https://github.com/siddiquipro/xtack/commit/4d730e488a6adcf55893c87fc135914356f5a071))
+
 ## [1.1.3](https://github.com/siddiquipro/xtack/compare/v1.1.2...v1.1.3) (2025-02-28)
 
 
