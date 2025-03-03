@@ -25,7 +25,12 @@ export class CookieStore {
 	}
 
 	destroy() {
-		this.config.cookie.deleteCookie();
+		if (this.config.cookie.deleteCookie) {
+			this.config.cookie.deleteCookie();
+		}
+		else {
+			this.config.cookie.setCookie("");
+		}
 	}
 
 	touch(): void {

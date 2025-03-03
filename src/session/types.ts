@@ -1,7 +1,7 @@
 export interface CookieFetcher {
 	getCookie: () => string | undefined;
 	setCookie: (value: string) => void;
-	deleteCookie: () => string | undefined;
+	deleteCookie?: () => string | undefined;
 }
 
 export interface SessionConfig {
