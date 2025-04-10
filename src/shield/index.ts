@@ -46,6 +46,7 @@ export class CsrfShield {
 		return newCsrfSecret;
 	}
 
+	// run this method to validate and generate the csrf token
 	public async handle() {
 		const csrfSecret = await this.getCsrfSecret();
 
