@@ -18,7 +18,7 @@ export default defineConfig(({ mode }) => {
 		},
 
 		test: {
-			include: ["tests/*.spec.ts"],
+			include: ["tests/*.spec.ts", "tests/*.test.ts"],
 		},
 		plugins: [
 			// generate typescript types
