@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/siddiquipro/xtack/compare/v1.1.4...v1.2.0) (2025-04-10)
+
+
+### Features
+
+* csrf shield ([2de4584](https://github.com/siddiquipro/xtack/commit/2de4584345d166a5b83561bd08cdba02d21f8262))
+
 ## [1.1.4](https://github.com/siddiquipro/xtack/compare/v1.1.3...v1.1.4) (2025-03-03)
 
 
