@@ -35,7 +35,8 @@
 		"lint:fix": "eslint . --fix"
 	},
 	"dependencies": {
-		"@adonisjs/encryption": "^6.0.2"
+		"@adonisjs/encryption": "^6.0.2",
+		"csrf": "^3.1.0"
 	},
 	"devDependencies": {
 		"@antfu/eslint-config": "^4.11.0",
