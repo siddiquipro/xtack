@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
 				fileName: "index",
 			},
 			rollupOptions: {
-				external: ["node:fs", "node:fs/promises", "node:util", "node:path", "node:url", "node:buffer", "node:crypto"],
+				external: ["node:fs", "node:fs/promises", "node:util", "node:path", "node:url", "node:buffer", "node:crypto", "node:assert", "@poppinss/utils","@poppinss/utils/string","@adonisjs/encryption", '@poppinss/utils/assert',"assert",],
 			},
 		},
 
