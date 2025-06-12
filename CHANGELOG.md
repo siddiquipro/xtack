@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/siddiquipro/xtack/compare/v1.2.0...v1.2.1) (2025-06-12)
+
+
+### Bug Fixes
+
+* fixed an error of is not a string, by adding external depencies to rollup externals ([#2](https://github.com/siddiquipro/xtack/issues/2)) ([ab9191e](https://github.com/siddiquipro/xtack/commit/ab9191ea43e6b8dae45d1b44c65c57918b9cbf31))
+
 # [1.2.0](https://github.com/siddiquipro/xtack/compare/v1.1.4...v1.2.0) (2025-04-10)
 
 
