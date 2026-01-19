@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/siddiquipro/xtack/compare/v1.2.2...v1.2.3) (2026-01-19)
+
+
+### Bug Fixes
+
+* update repository URL format in package.json ([ac1ba22](https://github.com/siddiquipro/xtack/commit/ac1ba22b271519c14347e82220c6e1b72f2d6a0d))
+
 ## [1.2.2](https://github.com/siddiquipro/xtack/compare/v1.2.1...v1.2.2) (2026-01-19)
 
 
