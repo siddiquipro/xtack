@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/siddiquipro/xtack/compare/v1.2.4...v1.2.5) (2026-01-19)
+
+
+### Bug Fixes
+
+* version updates ([41a87e4](https://github.com/siddiquipro/xtack/commit/41a87e4b86a445273499ca97eaa949087bb67b63))
+
 ## [1.2.1](https://github.com/siddiquipro/xtack/compare/v1.2.0...v1.2.1) (2025-06-12)
 
 
