@@ -23,8 +23,11 @@ jobs:
         with:
           node-version: "lts/*"
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Install dependencies
-        run: npm ci && npm run build
+        run: pnpm install --frozen-lockfile && pnpm run build
 
       - name: Release
         env:
