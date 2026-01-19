@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/siddiquipro/xtack/compare/v1.2.3...v1.2.4) (2026-01-19)
+
+
+### Bug Fixes
+
+* update README for clarity and enhance ESLint config ([1fa29c0](https://github.com/siddiquipro/xtack/commit/1fa29c0026aa1b1eba74e3d49f706cfe3488c900))
+
 ## [1.2.3](https://github.com/siddiquipro/xtack/compare/v1.2.2...v1.2.3) (2026-01-19)
 
 
