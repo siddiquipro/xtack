@@ -25,7 +25,7 @@ describe("nodeHbs", () => {
 	});
 
 	it("should render template with data", () => {
-		const result = nodeHbs.render("test", { name: "World" });
+		const result = nodeHbs.render("test", { name: "World" }, null);
 		expect(result).toBe("Hello World!");
 	});
 
@@ -36,7 +36,9 @@ describe("nodeHbs", () => {
 
 	it("should register helper", () => {
 		nodeHbs.registerHelper("uppercase", (str: string) => str.toUpperCase());
-		const result = nodeHbs.render("test", { name: "World" });
+		// Create a template that uses the helper
+		writeFileSync(join(testDir, "helper-test.hbs"), "Hello {{uppercase name}}!");
+		const result = nodeHbs.render("helper-test", { name: "World" }, null);
 		expect(result).toBe("Hello WORLD!");
 	});
 

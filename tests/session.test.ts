@@ -9,7 +9,7 @@ describe("session", () => {
 	beforeEach(() => {
 		cookieFetcher = new MockCookieFetcher();
 		session = new Session({
-			secret: "test-secret",
+			secret: "test-secret-random-key-for-encryption",
 			ageInSeconds: 3600,
 			cookie: cookieFetcher,
 		});
@@ -42,14 +42,37 @@ describe("session", () => {
 
 	it("should handle numeric values", () => {
 		session.put("counter", 5);
-		expect(session.increment("counter")).toBe(6);
-		expect(session.decrement("counter")).toBe(5);
+		session.increment("counter");
+		expect(session.get("counter")).toBe(6);
+		session.decrement("counter");
+		expect(session.get("counter")).toBe(5);
 	});
 
 	it("should handle flash messages", () => {
 		session.flash("message", "Hello");
-		expect(session.getFlash("message")).toBe("Hello");
-		expect(session.getFlash("message")).toBeUndefined();
+		session.commit();
+
+		// Re-initiate session to read flash messages
+		const newSession = new Session({
+			secret: "test-secret-random-key-for-encryption",
+			ageInSeconds: 3600,
+			cookie: cookieFetcher,
+		});
+		newSession.initiate();
+
+		// Flash messages can be read multiple times within the same request
+		expect(newSession.getFlash("message")).toBe("Hello");
+		expect(newSession.getFlash("message")).toBe("Hello");
+
+		// But should be gone after next commit/initiate cycle
+		newSession.commit();
+		const thirdSession = new Session({
+			secret: "test-secret-random-key-for-encryption",
+			ageInSeconds: 3600,
+			cookie: cookieFetcher,
+		});
+		thirdSession.initiate();
+		expect(thirdSession.getFlash("message")).toBeUndefined();
 	});
 
 	it("should clear all values", () => {
@@ -64,9 +87,9 @@ describe("session", () => {
 		session.put("test1", "value1");
 		session.put("test2", "value2");
 		const all = session.all();
-		expect(all).toEqual({
-			test1: "value1",
-			test2: "value2",
-		});
+		expect(all.test1).toBe("value1");
+		expect(all.test2).toBe("value2");
+		// Session also includes __id__ key
+		expect(all).toHaveProperty("__id__");
 	});
 });

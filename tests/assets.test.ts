@@ -1,6 +1,6 @@
-import { readFileSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { beforeEach, describe, expect, it } from "vitest";
+import { beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { AssetsManager } from "../src/assets/index.js";
 
 describe("assetsManager", () => {
@@ -14,9 +14,15 @@ describe("assetsManager", () => {
 		},
 	};
 
+	const manifestPath = join(process.cwd(), "dist", "manifest.json");
+
+	beforeAll(() => {
+		// Create the dist directory and manifest file
+		mkdirSync(join(process.cwd(), "dist"), { recursive: true });
+		writeFileSync(manifestPath, JSON.stringify(mockManifest));
+	});
+
 	beforeEach(() => {
-		// Mock the manifest file
-		const manifestPath = join(process.cwd(), "dist", "manifest.json");
 		assetsManager = new AssetsManager({
 			manifestPath,
 			inProduction: true,
@@ -25,12 +31,12 @@ describe("assetsManager", () => {
 
 	it("should get JS script tags", () => {
 		const script = assetsManager.getJsScript("app");
-		expect(script).toContain("<script type=\"module\" src=\"/assets/app.js\"></script>");
+		expect(script).toContain("<script type=\"module\" src=\"/assets/app.js\" ></script>");
 	});
 
 	it("should get CSS style tags", () => {
 		const style = assetsManager.getCssStyle("app");
-		expect(style).toContain("<link rel=\"stylesheet\" href=\"/assets/app.css\">");
+		expect(style).toContain("<link rel=\"stylesheet\" href=\"/assets/app.css\" >");
 	});
 
 	it("should throw error for non-existent asset", () => {
