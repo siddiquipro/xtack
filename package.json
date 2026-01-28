@@ -1,7 +1,7 @@
 {
 	"name": "xtack",
 	"type": "module",
-	"version": "1.2.5",
+	"version": "1.2.6",
 	"description": "A Node.js framework agnostic packages",
 	"author": {
 		"name": "Mohammad Siddiqui",

@@ -1,3 +1,10 @@
+## [1.2.6](https://github.com/siddiquipro/xtack/compare/v1.2.5...v1.2.6) (2026-01-28)
+
+
+### Bug Fixes
+
+* update dependencies and adjust tsconfig include path ([2c5b077](https://github.com/siddiquipro/xtack/commit/2c5b077fed97adcb968c6bfc0362d52a713df013))
+
 ## [1.2.5](https://github.com/siddiquipro/xtack/compare/v1.2.4...v1.2.5) (2026-01-19)
 
 
