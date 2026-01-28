@@ -36,7 +36,9 @@
 	},
 	"dependencies": {
 		"@adonisjs/encryption": "^6.0.2",
-		"csrf": "^3.1.0"
+		"@poppinss/utils": "^6.10.1",
+		"csrf": "^3.1.0",
+		"handlebars": "^4.7.8"
 	},
 	"devDependencies": {
 		"@antfu/eslint-config": "^7.0.1",

@@ -11,9 +11,15 @@ importers:
       '@adonisjs/encryption':
         specifier: ^6.0.2
         version: 6.0.2
+      '@poppinss/utils':
+        specifier: ^6.10.1
+        version: 6.10.1
       csrf:
         specifier: ^3.1.0
         version: 3.1.0
+      handlebars:
+        specifier: ^4.7.8
+        version: 4.7.8
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^7.0.1
