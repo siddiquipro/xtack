@@ -8,7 +8,7 @@ export class Encryption {
 		this.key = createHash("sha256").update(config.secret).digest();
 	}
 
-	public encrypt(value: any, expiresInMs?: number): string {
+	public encrypt(value: unknown, expiresInMs?: number): string {
 		const payload = JSON.stringify(value);
 		const iv = randomBytes(12);
 		const cipher = createCipheriv("aes-256-gcm", this.key, iv);
@@ -19,7 +19,7 @@ export class Encryption {
 		return `${iv.toString("base64url")}.${encrypted.toString("base64url")}.${authTag.toString("base64url")}.${expiry}`;
 	}
 
-	public decrypt(value: string | undefined | null): any {
+	public decrypt(value: string | undefined | null): unknown {
 		if (!value) {
 			return null;
 		}

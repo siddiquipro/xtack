@@ -86,10 +86,16 @@ const string = {
 	},
 	random(length = 16): string {
 		const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-		const bytes = randomBytes(length);
+		const maxMultiple = 256 - (256 % chars.length);
 		let output = "";
-		for (let i = 0; i < length; i++) {
-			output += chars[bytes[i] % chars.length];
+		while (output.length < length) {
+			const bytes = randomBytes(length);
+			for (let i = 0; i < bytes.length && output.length < length; i++) {
+				if (bytes[i] >= maxMultiple) {
+					continue;
+				}
+				output += chars[bytes[i] % chars.length];
+			}
 		}
 		return output;
 	},

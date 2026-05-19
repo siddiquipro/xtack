@@ -18,6 +18,11 @@ function cloneValue(value: unknown): unknown {
 	return output;
 }
 
+/**
+ * Deeply merges plain objects without mutating inputs.
+ * Arrays and non-plain objects are replaced with source values.
+ * When either input is not a plain object, the source value is returned.
+ */
 export function deepMerge(target: unknown, source: unknown): unknown {
 	if (!isPlainObject(target) || !isPlainObject(source)) {
 		return cloneValue(source);

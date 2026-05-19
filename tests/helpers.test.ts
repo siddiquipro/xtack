@@ -28,10 +28,9 @@ describe("helpers", () => {
 		expect(encryption.decrypt(encrypted)).toEqual({ name: "xtack" });
 	});
 
-	it("should return null for expired values", async () => {
+	it("should return null for expired values", () => {
 		const encryption = new Encryption({ secret: "my-secret" });
-		const encrypted = encryption.encrypt({ name: "xtack" }, 1);
-		await new Promise(resolve => setTimeout(resolve, 5));
+		const encrypted = encryption.encrypt({ name: "xtack" }, -1);
 		expect(encryption.decrypt(encrypted)).toBeNull();
 	});
 });

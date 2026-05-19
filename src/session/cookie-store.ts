@@ -20,7 +20,12 @@ export class CookieStore implements ISessionStore {
 		if (encValue && typeof cookieValue !== "object") {
 			debug("Failed to decrypt session cookie or value is not an object");
 		}
-		return typeof cookieValue !== "object" ? null : cookieValue;
+
+		if (!cookieValue || typeof cookieValue !== "object" || Array.isArray(cookieValue)) {
+			return null;
+		}
+
+		return cookieValue as SessionData;
 	}
 
 	write(value: SessionData): void {
