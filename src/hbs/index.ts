@@ -128,7 +128,9 @@ export class NodeHbs {
 
 		const raw = this.readPath(join(this.opts.layoutsPath!, `${filename}.hbs`));
 		const compiled = this.compileRaw(raw);
-		this.store.set(cacheKey, compiled);
+		if (this.opts.cacheViews) {
+			this.store.set(cacheKey, compiled);
+		}
 		return compiled;
 	}
 

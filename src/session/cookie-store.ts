@@ -1,21 +1,21 @@
-import type { ISessionStore, SessionConfig, SessionData } from "./types.js";
+import type { CookieSessionConfig, ISessionStore, SessionData } from "./types.js";
 import debug from "../debug.js";
 import { Encryption } from "../helpers/index.js";
 
 export class CookieStore implements ISessionStore {
-	private config: SessionConfig;
+	private config: CookieSessionConfig;
 	private encryption: Encryption;
 	private expiresInMs: number;
 
-	constructor(config: SessionConfig) {
+	constructor(config: CookieSessionConfig) {
 		this.config = config;
-		// encryption takex in ms
-		this.expiresInMs = Number(this.config.ageInSeconds!) * 1000;
-		this.encryption = new Encryption({ secret: config.secret! });
+		// encryption takes in ms
+		this.expiresInMs = Number(this.config.ageInSeconds) * 1000;
+		this.encryption = new Encryption({ secret: config.secret });
 	}
 
 	read(): SessionData | null {
-		const encValue = this.config.cookie!.getCookie();
+		const encValue = this.config.cookie.getCookie();
 		const cookieValue = this.encryption.decrypt(encValue);
 		if (encValue && typeof cookieValue !== "object") {
 			debug("Failed to decrypt session cookie or value is not an object");
@@ -38,7 +38,7 @@ export class CookieStore implements ISessionStore {
 			this.config.cookie.deleteCookie();
 		}
 		else {
-			this.config.cookie!.setCookie("");
+			this.config.cookie.setCookie("");
 		}
 	}
 

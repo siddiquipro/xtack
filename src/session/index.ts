@@ -31,7 +31,7 @@ export class Session {
 
 		if (!config.secret)
 			throw new Error("Session secret is required");
-		if (typeof config.ageInSeconds !== "number" || Number.isNaN(config.ageInSeconds))
+		if (Number.isNaN(config.ageInSeconds))
 			throw new Error("Session age is required");
 		if (!config.cookie)
 			throw new Error("Session cookie fetcher is required");
