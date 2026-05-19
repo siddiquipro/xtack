@@ -89,7 +89,8 @@ const string = {
 		const maxMultiple = 256 - (256 % chars.length);
 		let output = "";
 		while (output.length < length) {
-			const bytes = randomBytes(length);
+			const remaining = length - output.length;
+			const bytes = randomBytes(remaining);
 			for (let i = 0; i < bytes.length && output.length < length; i++) {
 				if (bytes[i] >= maxMultiple) {
 					continue;
