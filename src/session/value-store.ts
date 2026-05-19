@@ -1,6 +1,6 @@
 import type { AllowedSessionValues, SessionData } from "./types.js";
-import lodash from "@poppinss/utils/lodash";
 import { Exception } from "../exception/index.js";
+import { deepMerge } from "../helpers/merge.js";
 
 export class ValuesStore {
 	protected values: Map<string, AllowedSessionValues>;
@@ -22,11 +22,11 @@ export class ValuesStore {
 		return this.values.has(key);
 	}
 
-	get(key: string, defaultValue: any) {
+	get<T = AllowedSessionValues>(key: string, defaultValue?: T): T | undefined {
 		if (!this.values.has(key)) {
 			return defaultValue;
 		}
-		return this.values.get(key);
+		return this.values.get(key) as T;
 	}
 
 	set(key: string, value: AllowedSessionValues) {
@@ -77,11 +77,11 @@ export class ValuesStore {
 		this.values = new Map(Object.entries(values || {}));
 	}
 
-	merge(values: SessionData): any {
+	merge(values: SessionData): void {
 		this.modified = true;
 		const currentValues = this.all();
-		lodash.merge(currentValues, values);
-		this.values = new Map(Object.entries(currentValues));
+		const mergedValues = deepMerge(currentValues, values) as SessionData;
+		this.values = new Map(Object.entries(mergedValues));
 	}
 
 	clear(): void {

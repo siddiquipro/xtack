@@ -1,3 +1,4 @@
+import type { ISessionStore, SessionData } from "../src/session/types.js";
 import { beforeEach, describe, expect, it } from "vitest";
 import { Session } from "../src/session/index.js";
 import { MockCookieFetcher } from "./mocks/cookie-fetcher.js";
@@ -91,5 +92,39 @@ describe("session", () => {
 		expect(all.test2).toBe("value2");
 		// Session also includes __id__ key
 		expect(all).toHaveProperty("__id__");
+	});
+
+	it("should regenerate session id", () => {
+		const oldId = session.id;
+		session.regenerateId();
+		expect(session.id).not.toBe(oldId);
+	});
+
+	it("should support custom session store", () => {
+		class InMemoryStore implements ISessionStore {
+			private data: SessionData | null = { test: "value" };
+
+			read(): SessionData | null {
+				return this.data;
+			}
+
+			write(value: SessionData): void {
+				this.data = value;
+			}
+
+			destroy(): void {
+				this.data = null;
+			}
+
+			touch(): void {}
+		}
+
+		const store = new InMemoryStore();
+		const customSession = new Session({ store });
+		customSession.initiate();
+		expect(customSession.get<string>("test")).toBe("value");
+		customSession.put("fromCustomStore", "yes");
+		customSession.commit();
+		expect(store.read()).toHaveProperty("fromCustomStore", "yes");
 	});
 });

@@ -1,9 +1,7 @@
-import * as utils from "@poppinss/utils";
-import * as assertModule from "@poppinss/utils/assert";
+import { Encryption } from "./encryption.js";
 import string from "./string.js";
 
-export { Encryption } from "@adonisjs/encryption";
+export { Encryption };
 
-type Helpers = typeof utils & { string: typeof string, assert: typeof  assertModule.assert };
-
-export const helpers = { ...utils, assert: assertModule.assert, string } as Helpers;
+// Breaking change: removed @poppinss/utils and assert re-exports.
+export const helpers = { string };

@@ -1,4 +1,5 @@
 import type { Session } from "../session/index.js";
+import { Exception } from "../exception/index.js";
 
 export class Auth<T> {
 	private session: Session;
@@ -16,13 +17,22 @@ export class Auth<T> {
 	// Login method
 	public async login(id: number | string): Promise<void> {
 		this.user = await this.fetchUser(id);
+		this.session.regenerateId();
 		this.session.put(this.authKey, id);
 	}
 
 	async getAuthUser() {
 		await this.check();
 		if (!this.user) {
-			throw new Error("User not found");
+			throw new Exception("Unauthorized", 401);
+		}
+		return this.user;
+	}
+
+	public async mustBeAuthenticated(): Promise<T> {
+		await this.check();
+		if (!this.user) {
+			throw new Exception("Unauthorized", 401);
 		}
 		return this.user;
 	}
@@ -44,7 +54,7 @@ export class Auth<T> {
 			return;
 		}
 
-		const id = this.session.get(this.authKey);
+		const id = this.session.get<number | string>(this.authKey);
 		if (id) {
 			this.user = await this.fetchUser(id);
 		}

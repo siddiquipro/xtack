@@ -11,6 +11,7 @@ jobs:
       contents: write
       issues: write
       pull-requests: write
+      id-token: write
     name: Release
     runs-on: ubuntu-latest
 
@@ -33,6 +34,12 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile && pnpm run build
+
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Test
+        run: pnpm test
 
       - name: Release
         env:

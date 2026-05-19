@@ -2,6 +2,7 @@
 	"name": "xtack",
 	"type": "module",
 	"version": "1.2.6",
+	"packageManager": "pnpm@9.0.0",
 	"description": "A Node.js framework agnostic packages",
 	"author": {
 		"name": "Mohammad Siddiqui",
@@ -19,6 +20,36 @@
 		"framework",
 		"agnostic"
 	],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		},
+		"./session": {
+			"types": "./dist/session/index.d.ts",
+			"import": "./dist/session/index.js"
+		},
+		"./auth": {
+			"types": "./dist/auth/index.d.ts",
+			"import": "./dist/auth/index.js"
+		},
+		"./shield": {
+			"types": "./dist/shield/index.d.ts",
+			"import": "./dist/shield/index.js"
+		},
+		"./hbs": {
+			"types": "./dist/hbs/index.d.ts",
+			"import": "./dist/hbs/index.js"
+		},
+		"./assets": {
+			"types": "./dist/assets/index.d.ts",
+			"import": "./dist/assets/index.js"
+		},
+		"./helpers": {
+			"types": "./dist/helpers/index.d.ts",
+			"import": "./dist/helpers/index.js"
+		}
+	},
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"files": [
@@ -26,6 +57,9 @@
 		"README.md",
 		"dist"
 	],
+	"engines": {
+		"node": ">=20.0.0"
+	},
 	"scripts": {
 		"test": "vitest run",
 		"build": "vite build",
@@ -35,9 +69,6 @@
 		"lint:fix": "eslint . --fix"
 	},
 	"dependencies": {
-		"@adonisjs/encryption": "^6.0.2",
-		"@poppinss/utils": "^6.10.1",
-		"csrf": "^3.1.0",
 		"handlebars": "^4.7.8"
 	},
 	"devDependencies": {

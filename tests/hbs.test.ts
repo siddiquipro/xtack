@@ -34,6 +34,19 @@ describe("nodeHbs", () => {
 		expect(result).toBe("<div>Hello World!</div>");
 	});
 
+	it("should cache layout and clear cache", () => {
+		const firstRender = nodeHbs.render("test", { name: "World" }, "main");
+		expect(firstRender).toBe("<div>Hello World!</div>");
+
+		writeFileSync(join(testDir, "layouts", "main.hbs"), "<main>{{mainSlot}}</main>");
+		const secondRender = nodeHbs.render("test", { name: "World" }, "main");
+		expect(secondRender).toBe("<div>Hello World!</div>");
+
+		nodeHbs.clearCache();
+		const thirdRender = nodeHbs.render("test", { name: "World" }, "main");
+		expect(thirdRender).toBe("<main>Hello World!</main>");
+	});
+
 	it("should register helper", () => {
 		nodeHbs.registerHelper("uppercase", (str: string) => str.toUpperCase());
 		// Create a template that uses the helper
