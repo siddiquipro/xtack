@@ -16,6 +16,7 @@
 		"noUnusedParameters": true,
 		"declaration": true,
 		"outDir": "dist",
+		"rootDir": "src",
 		"removeComments": false,
 		"sourceMap": true,
 		"allowSyntheticDefaultImports": true,

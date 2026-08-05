@@ -18,6 +18,7 @@ export default antfu(
 		rules: {
 			"no-console": ["warn"],
 			"antfu/no-top-level-await": ["off"],
+			"ts/explicit-function-return-type": ["off"],
 			"node/prefer-global/process": ["off"],
 			"node/no-process-env": ["error"],
 			"perfectionist/sort-imports": ["error"],
