@@ -3,7 +3,7 @@
 ## Scope
 
 Comparison range:
-- Previous commit: `f287092` (v1.2.6 release commit)
+- Previous commit: `f287092` (v1.x release commit)
 - New commit: `bdec3bc` (`Restructure library by removing dependencies: BREAKING CHANGE`)
 
 ## Summary
