@@ -29,7 +29,8 @@ describe("auth", () => {
 			return null;
 		};
 
-		auth = new Auth(session, fetchUser);
+		// Enable regenerateSessionOnLogin for this test suite (opt-in security feature)
+		auth = new Auth(session, fetchUser, true);
 	});
 
 	it("should login user", async () => {
@@ -56,7 +57,7 @@ describe("auth", () => {
 			if (id === mockUser.id)
 				return mockUser;
 			return null;
-		});
+		}, true);
 
 		await newAuth.check();
 		expect(newAuth.isAuthenticated()).toBe(true);
