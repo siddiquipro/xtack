@@ -1,3 +1,13 @@
+# [2.0.0](https://github.com/siddiquipro/xtack/compare/v1.2.6...v2.0.0) (2026-08-05)
+
+
+* feat!: mark breaking release BREAKING CHANGE: Removed @poppinss/utils re-exports and switched encryption implementation. ([c922c2c](https://github.com/siddiquipro/xtack/commit/c922c2cad4971137ce052ed7fe921bdaf621c138))
+
+
+### BREAKING CHANGES
+
+* Removed @poppinss/utils re-exports and switched encryption implementation.
+
 ## [1.2.6](https://github.com/siddiquipro/xtack/compare/v1.2.5...v1.2.6) (2026-01-28)
 
 
