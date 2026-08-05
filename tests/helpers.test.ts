@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { helpers } from "../src/helpers/index.js";
+import { Encryption, helpers } from "../src/helpers/index.js";
 
 describe("helpers", () => {
 	it("should have string helpers", () => {
@@ -20,5 +20,17 @@ describe("helpers", () => {
 	it("should handle string case conversion", () => {
 		expect(helpers.string.titleCase("hello world")).toBe("Hello World");
 		expect(helpers.string.capitalCase("hello world")).toBe("Hello World");
+	});
+
+	it("should encrypt and decrypt values", () => {
+		const encryption = new Encryption({ secret: "my-secret" });
+		const encrypted = encryption.encrypt({ name: "xtack" });
+		expect(encryption.decrypt(encrypted)).toEqual({ name: "xtack" });
+	});
+
+	it("should return null for expired values", () => {
+		const encryption = new Encryption({ secret: "my-secret" });
+		const encrypted = encryption.encrypt({ name: "xtack" }, -1);
+		expect(encryption.decrypt(encrypted)).toBeNull();
 	});
 });

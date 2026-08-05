@@ -256,11 +256,7 @@ const csrf = new CsrfShield({
 });
 
 // Validate and generate CSRF token
-const isValid = await csrf.handle();
-
-if (!isValid) {
-	throw new Exception("Invalid CSRF token", 403);
-}
+await csrf.handle(); // throws Exception("Invalid CSRF token", 403) on failure by default
 
 // Use in forms
 // <input type="hidden" name="_csrf" value="{{csrfToken}}">
@@ -270,12 +266,12 @@ if (!isValid) {
 
 ### `Encryption` and `helpers`
 
-Re-exports from `@adonisjs/encryption` and `@poppinss/utils` for encryption and common utility functions.
+Native AES-256-GCM encryption and built-in string helpers.
 
 ```ts
 import { Encryption, helpers } from "xtack";
 
-// Encryption (from @adonisjs/encryption)
+// Encryption
 const encryption = new Encryption({
 	secret: "your-32-character-secret-key-here",
 });
@@ -283,7 +279,7 @@ const encryption = new Encryption({
 const encrypted = encryption.encrypt("Sensitive data");
 const decrypted = encryption.decrypt(encrypted);
 
-// String helpers (from @poppinss/utils/string)
+// String helpers
 helpers.string.slug("Hello World"); // "hello-world"
 helpers.string.camelCase("hello_world"); // "helloWorld"
 helpers.string.snakeCase("helloWorld"); // "hello_world"
@@ -300,12 +296,6 @@ helpers.string.excerpt("Long text...", 10); // "Long..."
 helpers.string.random(16); // random string
 helpers.string.ordinal(1); // "1st"
 
-// Assert helper (from @poppinss/utils/assert)
-helpers.assert(condition, "Error message");
-
-// Other utilities from @poppinss/utils
-helpers.base64.encode("hello");
-helpers.base64.decode("aGVsbG8=");
 ```
 
 ## License

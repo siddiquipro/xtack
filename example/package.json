@@ -1,15 +1,18 @@
 {
 	"name": "example",
 	"type": "module",
+	"engines": {
+		"node": "24.x"
+	},
 	"scripts": {
 		"dev": "tsx watch src/index.ts"
 	},
 	"dependencies": {
-		"@hono/node-server": "^1.19.9",
-		"hono": "^4.11.4"
+		"@hono/node-server": "^2.1.0",
+		"hono": "^4.13.0"
 	},
 	"devDependencies": {
-		"@types/node": "^25.0.9",
-		"tsx": "^4.21.0"
+		"@types/node": "^26.1.2",
+		"tsx": "^4.23.7"
 	}
 }

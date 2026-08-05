@@ -3,6 +3,7 @@
 		"target": "ESNext",
 		"lib": ["ESNext"],
 		"experimentalDecorators": true,
+		"rootDir": "src",
 		"module": "NodeNext",
 		"types": ["@types/node"],
 		"strictBindCallApply": true,

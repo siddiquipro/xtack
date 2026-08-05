@@ -29,13 +29,16 @@ describe("auth", () => {
 			return null;
 		};
 
-		auth = new Auth(session, fetchUser);
+		// Enable regenerateSessionOnLogin for this test suite (opt-in security feature)
+		auth = new Auth(session, fetchUser, true);
 	});
 
 	it("should login user", async () => {
+		const currentSessionId = session.id;
 		await auth.login(mockUser.id);
 		expect(auth.isAuthenticated()).toBe(true);
 		expect(auth.user).toEqual(mockUser);
+		expect(session.id).not.toBe(currentSessionId);
 	});
 
 	it("should logout user", async () => {
@@ -54,14 +57,23 @@ describe("auth", () => {
 			if (id === mockUser.id)
 				return mockUser;
 			return null;
-		});
+		}, true);
 
 		await newAuth.check();
 		expect(newAuth.isAuthenticated()).toBe(true);
 		expect(newAuth.user).toEqual(mockUser);
 	});
 
-	it("should throw error when getting non-existent user", async () => {
-		await expect(auth.getAuthUser()).rejects.toThrow("User not found");
+	it("should throw unauthorized when getting non-existent user", async () => {
+		await expect(auth.getAuthUser()).rejects.toThrow("Unauthorized");
+	});
+
+	it("mustBeAuthenticated should return user when authenticated", async () => {
+		await auth.login(mockUser.id);
+		await expect(auth.mustBeAuthenticated()).resolves.toEqual(mockUser);
+	});
+
+	it("mustBeAuthenticated should throw when unauthenticated", async () => {
+		await expect(auth.mustBeAuthenticated()).rejects.toThrow("Unauthorized");
 	});
 });

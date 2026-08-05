@@ -1,10 +1,11 @@
 import type { Session } from "../session/index.js";
-
-import Tokens from "csrf";
+import { Exception } from "../exception/index.js";
+import { CsrfTokens } from "./csrf-tokens.js";
 
 interface CsrfShieldConfig {
 	session: Session;
 	csrfMethods?: string[];
+	throwOnFailure?: boolean;
 	getRequestMethod: () => Promise<string>;
 	getCsrfTokenFromBody: () => Promise<string>;
 	setCsrfToken: (token: string) => Promise<void>;
@@ -13,12 +14,15 @@ interface CsrfShieldConfig {
 export class CsrfShield {
 	private secretSessionKey = "__csrf_secret";
 	private csrfMethods: string[];
+	private throwOnFailure: boolean;
 
-	protected _tokens = new Tokens();
+	protected _tokens = new CsrfTokens();
 	protected config: CsrfShieldConfig;
 
 	constructor(config: CsrfShieldConfig) {
 		this.csrfMethods = config.csrfMethods || ["POST", "PUT", "PATCH", "DELETE"];
+		// Default to false for backward compatibility; apps can opt-in to throwing behavior
+		this.throwOnFailure = config.throwOnFailure ?? false;
 		this.config = config;
 	}
 
@@ -37,7 +41,7 @@ export class CsrfShield {
 	}
 
 	private async getCsrfSecret() {
-		const csrfSecret = this.config.session.get(this.secretSessionKey);
+		const csrfSecret = this.config.session.get<string>(this.secretSessionKey);
 		if (csrfSecret)
 			return csrfSecret;
 
@@ -54,6 +58,9 @@ export class CsrfShield {
 		if (shouldValidate) {
 			const csrfToken = await this.getCsrfTokenFromRequest();
 			if (!csrfToken || !this._tokens.verify(csrfSecret, csrfToken)) {
+				if (this.throwOnFailure) {
+					throw new Exception("Invalid CSRF token", 403);
+				}
 				return false;
 			}
 		}

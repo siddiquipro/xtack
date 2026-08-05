@@ -121,8 +121,17 @@ export class NodeHbs {
 	}
 
 	private getLayout(filename: string) {
+		const cacheKey = `layout:${filename}`;
+		if (this.opts.cacheViews && this.store.has(cacheKey)) {
+			return this.store.get(cacheKey);
+		}
+
 		const raw = this.readPath(join(this.opts.layoutsPath!, `${filename}.hbs`));
-		return this.compileRaw(raw);
+		const compiled = this.compileRaw(raw);
+		if (this.opts.cacheViews) {
+			this.store.set(cacheKey, compiled);
+		}
+		return compiled;
 	}
 
 	public getRegisteredPartialNames(): RegisteredPartials [] {
@@ -143,5 +152,9 @@ export class NodeHbs {
 
 		// render with layout
 		return this.getLayout(layoutName)({ ...payload, mainSlot: pageHtml });
+	}
+
+	public clearCache(): void {
+		this.store.clear();
 	}
 }

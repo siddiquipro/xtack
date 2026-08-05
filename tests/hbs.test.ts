@@ -34,6 +34,36 @@ describe("nodeHbs", () => {
 		expect(result).toBe("<div>Hello World!</div>");
 	});
 
+	it("should cache layout and clear cache", () => {
+		const firstRender = nodeHbs.render("test", { name: "World" }, "main");
+		expect(firstRender).toBe("<div>Hello World!</div>");
+
+		writeFileSync(join(testDir, "layouts", "main.hbs"), "<main>{{mainSlot}}</main>");
+		const secondRender = nodeHbs.render("test", { name: "World" }, "main");
+		expect(secondRender).toBe("<div>Hello World!</div>");
+
+		nodeHbs.clearCache();
+		const thirdRender = nodeHbs.render("test", { name: "World" }, "main");
+		expect(thirdRender).toBe("<main>Hello World!</main>");
+	});
+
+	it("should not cache layout when cacheViews is false", () => {
+		const nonCachedHbs = new NodeHbs({
+			viewsPath: testDir,
+			globalData: { siteName: "Test Site" },
+			cacheViews: false,
+		});
+
+		const firstRender = nonCachedHbs.render("test", { name: "World" }, "main");
+		expect(firstRender).toBe("<div>Hello World!</div>");
+
+		writeFileSync(join(testDir, "layouts", "main.hbs"), "<section>{{mainSlot}}</section>");
+		const secondRender = nonCachedHbs.render("test", { name: "World" }, "main");
+		expect(secondRender).toBe("<section>Hello World!</section>");
+		const store = Reflect.get(nonCachedHbs, "store") as Map<string, unknown>;
+		expect(store.has("layout:main")).toBe(false);
+	});
+
 	it("should register helper", () => {
 		nodeHbs.registerHelper("uppercase", (str: string) => str.toUpperCase());
 		// Create a template that uses the helper

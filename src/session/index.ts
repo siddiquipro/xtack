@@ -1,4 +1,4 @@
-import type { AllowedSessionValues, SessionConfig, SessionData } from "./types.js";
+import type { AllowedSessionValues, ISessionStore, SessionConfig, SessionData } from "./types.js";
 import { randomUUID } from "node:crypto";
 import debug from "../debug.js";
 import { Exception } from "../exception/index.js";
@@ -6,7 +6,7 @@ import { CookieStore } from "./cookie-store.js";
 import { ValuesStore } from "./value-store.js";
 
 export class Session {
-	private store: CookieStore;
+	private store: ISessionStore;
 	private _valuesStore?: ValuesStore;
 	private sessionIdKey = "__id__";
 	private _flash = {
@@ -16,11 +16,6 @@ export class Session {
 	};
 
 	constructor(config: SessionConfig) {
-		if (!config.secret)
-			throw new Error("Session secret is required");
-		if (Number.isNaN(config.ageInSeconds))
-			throw new Error("Session age is required");
-
 		if (config.flashKey) {
 			this._flash.key = config.flashKey;
 		}
@@ -28,6 +23,18 @@ export class Session {
 		if (config.sessionIdKey) {
 			this.sessionIdKey = config.sessionIdKey;
 		}
+
+		if (config.store) {
+			this.store = config.store;
+			return;
+		}
+
+		if (!config.secret)
+			throw new Error("Session secret is required");
+		if (Number.isNaN(config.ageInSeconds))
+			throw new Error("Session age is required");
+		if (!config.cookie)
+			throw new Error("Session cookie fetcher is required");
 
 		this.store = new CookieStore(config);
 	}
@@ -75,8 +82,12 @@ export class Session {
 		return this.get(this.sessionIdKey);
 	}
 
-	get(key: string, defaultValue?: any) {
+	get<T = AllowedSessionValues>(key: string, defaultValue?: T): T | undefined {
 		return this.valuesStore.get(key, defaultValue);
+	}
+
+	public regenerateId(): void {
+		this.put(this.sessionIdKey, randomUUID().replace(/-/g, ""));
 	}
 
 	put(key: string, value: AllowedSessionValues) {
