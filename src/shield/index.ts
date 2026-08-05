@@ -21,7 +21,8 @@ export class CsrfShield {
 
 	constructor(config: CsrfShieldConfig) {
 		this.csrfMethods = config.csrfMethods || ["POST", "PUT", "PATCH", "DELETE"];
-		this.throwOnFailure = config.throwOnFailure ?? true;
+		// Default to false for backward compatibility; apps can opt-in to throwing behavior
+		this.throwOnFailure = config.throwOnFailure ?? false;
 		this.config = config;
 	}
 
