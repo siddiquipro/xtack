@@ -13,6 +13,7 @@ export default antfu(
 		hbs: true,
 		handlebars: true,
 		markdown: false,
+		md:false,
 	},
 	{
 		rules: {

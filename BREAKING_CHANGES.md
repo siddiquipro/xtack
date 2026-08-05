@@ -3,6 +3,7 @@
 ## Scope
 
 Comparison range:
+
 - Previous commit: `f287092` (v1.x release commit)
 - New commit: `bdec3bc` (`Restructure library by removing dependencies: BREAKING CHANGE`)
 
@@ -19,6 +20,7 @@ This change removes third-party utility and crypto dependencies from the public 
 - Impact: installs and CI on older Node versions will fail or be unsupported.
 
 Migration:
+
 - Update local/dev/CI runtimes to Node 24.x.
 - Align version managers (`.nvmrc`, Volta, CI setup) to Node 24.
 
@@ -36,6 +38,7 @@ Migration:
 - Impact: any deep imports not listed in `exports` may stop working.
 
 Migration:
+
 - Use only supported entry points above.
 - Replace deep/internal imports with documented public imports.
 
@@ -51,6 +54,7 @@ Migration:
   - Several removed utility names now have migration-guard exports that throw explicit runtime errors when called.
 
 Migration:
+
 - Replace `helpers.assert(...)` with Node `assert` or your validation library (for example Zod/Joi).
 - Replace utility calls with native Node.js or dedicated libraries (for example Lodash).
 - Keep using `helpers.string` where applicable.
@@ -66,6 +70,7 @@ Migration:
   - Data encrypted with old implementation may not be decryptable by the new implementation.
 
 Migration:
+
 - Plan key/cipher migration for persisted encrypted payloads (cookies/session blobs/tokens).
 - If backward decryption is needed, provide compatibility decode logic during rollout.
 
@@ -80,6 +85,7 @@ Migration:
   - Existing issued tokens may fail validation after deployment.
 
 Migration:
+
 - Expect token invalidation during deployment (users may need to refresh forms/session).
 - Roll out during a maintenance window if strict CSRF continuity is required.
 
@@ -93,6 +99,7 @@ Migration:
   - Error handling code checking old message/type will break.
 
 Migration:
+
 - Update handlers to catch `Exception` with status `401`.
 - Do not depend on the old error message.
 
