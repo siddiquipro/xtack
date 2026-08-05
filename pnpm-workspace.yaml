@@ -1,0 +1,2 @@
+minimumReleaseAgeExclude:
+  - semantic-release@25.0.9
