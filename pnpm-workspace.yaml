@@ -1,2 +1,5 @@
 minimumReleaseAgeExclude:
   - semantic-release@25.0.9
+shellEmulator: true
+
+trustPolicy: no-downgrade
